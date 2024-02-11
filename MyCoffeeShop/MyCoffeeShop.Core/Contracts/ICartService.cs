@@ -1,4 +1,5 @@
-﻿using MyCoffeeShop.Core.Models;
+﻿using MyCoffeeShop.Core.dto;
+using MyCoffeeShop.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,10 @@ namespace MyCoffeeShop.Core.Contracts
 {
     public interface ICartService
     {
-        void CreateCart(HttpContextBase httpContext);
+        Cart CreateCart(HttpContextBase httpContext);
         void AddToCart(HttpContextBase httpContext, string cartItemId);
         void RemoveFromCart(HttpContextBase httpContext, string cartItemId);
-        Cart GetCart(HttpContextBase httpContext);
-        List<CartItem> GetCartItems(HttpContextBase httpContext);
+        Cart GetCart(HttpContextBase httpContext, bool createIfNull);
+        List<CartItemDto> GetCartItems(HttpContextBase httpContext);
     }
 }

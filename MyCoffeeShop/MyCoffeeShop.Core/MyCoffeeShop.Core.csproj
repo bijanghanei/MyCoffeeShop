@@ -46,6 +46,7 @@
     <Compile Include="Contracts\IMenuItemService.cs" />
     <Compile Include="Contracts\IOrderService.cs" />
     <Compile Include="Contracts\IRepository.cs" />
+    <Compile Include="dto\CartItemDto.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CartItem.cs" />
