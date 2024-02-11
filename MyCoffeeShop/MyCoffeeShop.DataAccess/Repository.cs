@@ -16,7 +16,12 @@ namespace MyCoffeeShop.DataAccess
 
         public void DeleteById(string Id)
         {
-            
+            T entity = GetById(Id);
+            if(_context.Entry(entity).State == EntityState.Detached)
+            {
+                dbSet.Attach(entity);
+            }
+            dbSet.Remove(entity);
         }
 
         public IQueryable<T> GetAll()
@@ -31,7 +36,7 @@ namespace MyCoffeeShop.DataAccess
 
         public void Insert(T entity)
         {
-            throw new NotImplementedException();
+            dbSet.Add(entity);
         }
 
         public void Save()
@@ -41,7 +46,8 @@ namespace MyCoffeeShop.DataAccess
 
         public void Update(T entity)
         {
-            
+            dbSet.Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
         }
     }
 }
