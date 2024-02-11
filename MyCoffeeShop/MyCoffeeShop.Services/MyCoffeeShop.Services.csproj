@@ -46,5 +46,11 @@
     <Compile Include="OrderService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyCoffeeShop.Core\MyCoffeeShop.Core.csproj">
+      <Project>{593209B3-1882-4E03-A20A-319487314D13}</Project>
+      <Name>MyCoffeeShop.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
