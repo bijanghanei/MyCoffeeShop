@@ -108,6 +108,7 @@ namespace MyCoffeeShop.Services
                                                on m.Id equals c.MenuItemId
                                                select new CartItemDto() 
                                                { 
+                                                   Id = c.MenuItemId,
                                                     ItemName = m.Name,
                                                     UnitPrice = m.Price,
                                                     Quantity = c.Quantity,
