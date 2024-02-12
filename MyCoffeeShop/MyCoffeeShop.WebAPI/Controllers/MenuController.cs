@@ -19,9 +19,9 @@ namespace MyCoffeeShop.WebAPI.Controllers
         }
 
         //GET api/<controller>
-        public List<MenuItem> GetMenu()
+        public IEnumerable<MenuItem> GetMenu()
         {
-            List<MenuItem> list = menuService.GetAllItems().ToList();
+            IEnumerable<MenuItem> list = menuService.GetAllItems().ToList();
             return list;
         }
 
@@ -33,18 +33,28 @@ namespace MyCoffeeShop.WebAPI.Controllers
 
 
         // POST api/<controller>
-        public void Post([FromBody] string value)
+        [HttpPost]
+        public IHttpActionResult CreateItem(MenuItem item)
         {
+            menuService.CreateItem(item);
+            return Redirect("/api/Menu/");
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public IHttpActionResult Update(string Id, [FromBody] MenuItem item)
         {
+            MenuItem menuItem = menuService.GetItem(Id);
+            menuService.UpdateItem(menuItem);
+            return Redirect("/api/Menu/");
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        [HttpDelete]
+        public IHttpActionResult Delete(string Id)
         {
+            menuService.DeleteItem(Id);
+            return Redirect("/api/Menu/");
         }
     }
 }

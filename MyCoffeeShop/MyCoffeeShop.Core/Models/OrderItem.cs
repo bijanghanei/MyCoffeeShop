@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyCoffeeShop.Core.Models
 {
-    public class OrderItem
+    public class OrderItem : BaseEntity
     {
         public string ItemName { get; set; }
         public string OrderId { get; set; }

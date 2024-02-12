@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyCoffeeShop.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -9,6 +10,12 @@ namespace MyCoffeeShop.DataAccess
 {
     public class DataContext :DbContext
     {
-        public DataContext() : base("DefaultConnection") { }
+        DbSet<MenuItem> menuItems { get; set; }
+        DbSet<Cart> carts { get; set; }
+
+        DbSet<CartItem> cartItems { get; set; }
+        DbSet<Order> orders { get; set; }
+        DbSet<OrderItem> orderItems { get; set; }
+        public DataContext() : base("DefaultConnection") {}
     }
 }
