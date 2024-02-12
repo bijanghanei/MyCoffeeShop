@@ -1,19 +1,27 @@
-﻿using System;
+﻿using MyCoffeeShop.Core.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.UI.WebControls;
 
 namespace MyCoffeeShop.WebAPI.Controllers
 {
     public class ValuesController : ApiController
     {
-        // GET api/values
-        public IEnumerable<string> Get()
+        IMenuItemService MenuItemService;
+        public ValuesController(IMenuItemService menuItemService)
         {
-            return new string[] { "value1", "value2" };
+            MenuItemService = menuItemService;
         }
+
+        // GET api/values
+        //public List<MenuItem> Get()
+        //{
+        //    return MenuItemService.GetAllItems().ToList();
+        //}
 
         // GET api/values/5
         public string Get(int id)

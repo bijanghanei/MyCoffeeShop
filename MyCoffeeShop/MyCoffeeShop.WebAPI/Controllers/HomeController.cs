@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace MyCoffeeShop.WebAPI.Controllers
 {
@@ -10,7 +11,7 @@ namespace MyCoffeeShop.WebAPI.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            IEnumerable<MenuItem> menuItems = new List<MenuItem>();
 
             return View();
         }

@@ -13,7 +13,7 @@ namespace MyCoffeeShop.Core.Contracts
     {
         void CreatOrderItems(Order order, List<CartItemDto> cartItems);
         void UpdateOrder(Order order);
-        List<OrderItem> GetAllOrders();
+        List<Order> GetAllOrders();
         Order GetOrder(string orderId);
     }
 }
