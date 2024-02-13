@@ -49,6 +49,8 @@ namespace MyCoffeeShop.WebAPI
             container.RegisterType<IRepository<MenuItem>, Repository<MenuItem>>();
             container.RegisterType<IRepository<Order>, Repository<Order>>();
             container.RegisterType<IRepository<Cart>, Repository<Cart>>();
+            container.RegisterType<IRepository<CartItem>, Repository<CartItem>>();
+
 
             container.RegisterType<IOrderService, OrderService>();
             container.RegisterType<ICartService, CartService>();

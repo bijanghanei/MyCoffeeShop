@@ -21,7 +21,7 @@ namespace MyCoffeeShop.DataAccess
         }
         public void DeleteById(string Id)
         {
-            T entity = GetById(Id);
+            T entity = dbSet.Find(Id);
             if(_context.Entry(entity).State == EntityState.Detached)
             {
                 dbSet.Attach(entity);

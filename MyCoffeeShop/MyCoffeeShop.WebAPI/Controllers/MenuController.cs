@@ -6,12 +6,14 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using MyCoffeeShop.Core.Models;
+using System.Web;
 
 namespace MyCoffeeShop.WebAPI.Controllers
 {
     public class MenuController : ApiController
     {
         IMenuItemService menuService;
+        HttpContextBase httpContext;
 
         public MenuController(IMenuItemService menuService)
         {
