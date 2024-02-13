@@ -13,7 +13,6 @@ namespace MyCoffeeShop.WebAPI.Controllers
     public class MenuController : ApiController
     {
         IMenuItemService menuService;
-        HttpContextBase httpContext;
 
         public MenuController(IMenuItemService menuService)
         {

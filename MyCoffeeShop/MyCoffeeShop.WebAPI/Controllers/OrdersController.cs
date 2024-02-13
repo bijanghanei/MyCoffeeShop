@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyCoffeeShop.Core.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,5 +10,6 @@ namespace MyCoffeeShop.WebAPI.Controllers
 {
     public class OrdersController : ApiController
     {
+        IOrderService orderService;
     }
 }
