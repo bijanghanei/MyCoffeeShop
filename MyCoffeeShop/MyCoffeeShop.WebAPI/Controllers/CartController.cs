@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MyCoffeeShop.Core.Contracts;
+using MyCoffeeShop.Core.dto;
+using MyCoffeeShop.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,31 +12,40 @@ namespace MyCoffeeShop.WebAPI.Controllers
 {
     public class CartController : ApiController
     {
+        ICartService cartService;
+
+        public CartController(ICartService cartService)
+        {
+            this.cartService = cartService;
+        }
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public IEnumerable<CartItemDto> GetCartItems()
         {
-            return new string[] { "value1", "value2" };
+            List<CartItemDto> items = cartService.GetCartItems().ToList();
+            return items;
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+    
+
+    
+        //POST api/<controller>/5
+        [HttpPost]
+        [Route("api/cart/add/{Id}")]
+        public IHttpActionResult AddToCart(string Id)
         {
-            return "value";
+            cartService.AddToCart(Id);
+            return Redirect("https://localhost:44374/api/cart");
         }
 
-        // POST api/<controller>
-        public void Post([FromBody] string value)
-        {
-        }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        [HttpDelete]
+        [Route("api/cart/delete/{Id}")]
+        public IHttpActionResult Delete(string Id)
         {
+            cartService.RemoveFromCart(Id);
+            return Redirect("https://localhost:44374/api/cart");
         }
     }
 }

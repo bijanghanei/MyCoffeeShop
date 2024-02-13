@@ -11,7 +11,7 @@ namespace MyCoffeeShop.Core.Models
         public virtual ICollection<CartItem> Items { get; set; }
         public Cart() 
         {
-            Items = new List<CartItem>();
+            this.Items = new List<CartItem>();
         }
     }
 }

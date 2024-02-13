@@ -11,10 +11,10 @@ namespace MyCoffeeShop.Core.Contracts
 {
     public interface ICartService
     {
-        Cart CreateCart(HttpContextBase httpContext);
-        void AddToCart(HttpContextBase httpContext, string cartItemId);
-        void RemoveFromCart(HttpContextBase httpContext, string cartItemId);
-        Cart GetCart(HttpContextBase httpContext, bool createIfNull);
-        List<CartItemDto> GetCartItems(HttpContextBase httpContext);
+        Cart CreateCart();
+        void AddToCart(string cartItemId);
+        void RemoveFromCart(string cartItemId);
+        Cart GetCart(bool createIfNull);
+        List<CartItemDto> GetCartItems();
     }
 }

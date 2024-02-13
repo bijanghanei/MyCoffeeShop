@@ -4,6 +4,7 @@ using MyCoffeeShop.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -22,22 +23,22 @@ namespace MyCoffeeShop.Services
             CartRepository = cartRepository;
         }
 
-        public Cart CreateCart(HttpContextBase httpContext)
+        public Cart CreateCart()
         {
             Cart cart = new Cart();
             CartRepository.Insert(cart);
             CartRepository.Save();
 
-            HttpCookie httpCookie = new HttpCookie(cartSessionName,cart.Id);
+            HttpCookie httpCookie = new HttpCookie(cartSessionName);
             httpCookie.Expires = DateTime.Now.AddDays(1);
-            httpContext.Response.Cookies.Add(httpCookie);
-
+            httpCookie.Value = cart.Id;
+            HttpContext.Current.Response.Cookies.Add(httpCookie);
             return cart;    
         }
 
-        public void AddToCart(HttpContextBase httpContext, string menuItemId)
+        public void AddToCart(string menuItemId)
         {
-            Cart cart = GetCart(httpContext, true);
+            Cart cart = GetCart(true);
             MenuItem menuItem = MenuItemRepository.GetById(menuItemId);
             CartItem cartItem = cart.Items.FirstOrDefault(i => i.MenuItemId == menuItemId);
             if(cartItem == null)
@@ -57,26 +58,33 @@ namespace MyCoffeeShop.Services
             CartRepository.Save();
         }
 
-        public void RemoveFromCart(HttpContextBase httpContext, string cartItemId)
+        public void RemoveFromCart(string cartItemId)
         {
-            Cart cart = GetCart(httpContext, false);
+            Cart cart = GetCart(false);
             CartItem cartItem = cart.Items.FirstOrDefault(i => i.Id == cartItemId);
             if (cart != null && cartItem != null)
             {
-                cart.Items.Remove(cartItem);
+                if (cartItem.Quantity > 1)
+                {
+                    cartItem.Quantity--;
+                }
+                else
+                {
+                    cart.Items.Remove(cartItem);
+                }
                 CartRepository.Save();
             }
         }
 
-        public Cart GetCart(HttpContextBase httpContext, bool createIfNull)
+        public Cart GetCart(bool createIfNull)
         {
-            HttpCookie cookie = httpContext.Request.Cookies.Get(cartSessionName);
+            string cookieValue = HttpContext.Current.Request.Cookies.Get(cartSessionName).Value;
             Cart cart = new Cart();
 
-            if (cookie != null)
+            if (!string.IsNullOrEmpty(cookieValue))
             {
-                string cartId = cookie.Value;
-                if (string.IsNullOrEmpty(cookie.Value))
+                string cartId = cookieValue;
+                if (!string.IsNullOrEmpty(cookieValue))
                 {
                     cart = CartRepository.GetById(cartId);
                 }
@@ -84,7 +92,7 @@ namespace MyCoffeeShop.Services
                 {
                     if (createIfNull)
                     {
-                    cart = CreateCart(httpContext);
+                    cart = CreateCart();
                     }
                 }
             }
@@ -92,23 +100,23 @@ namespace MyCoffeeShop.Services
             {
                 if (createIfNull)
                 {
-                    cart = CreateCart(httpContext);
+                    cart = CreateCart();
                 }
             }
             return cart;
         }
 
-        public List<CartItemDto> GetCartItems(HttpContextBase httpContext)
+        public List<CartItemDto> GetCartItems()
         {
-            Cart cart = GetCart(httpContext, false);
+            Cart cart = GetCart(false);
             if(cart != null)
             {
-                List<CartItemDto> cartItems = (from m in MenuItemRepository.GetAll()
-                                               join c in cart.Items
-                                               on m.Id equals c.MenuItemId
+                List<CartItemDto> cartItems = (from c in cart.Items
+                                               join m in MenuItemRepository.GetAll()
+                                               on c.MenuItemId equals m.Id
                                                select new CartItemDto() 
                                                { 
-                                                   Id = c.MenuItemId,
+                                                    Id = c.MenuItemId,
                                                     ItemName = m.Name,
                                                     UnitPrice = m.Price,
                                                     Quantity = c.Quantity,

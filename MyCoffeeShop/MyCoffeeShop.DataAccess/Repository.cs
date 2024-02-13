@@ -14,9 +14,14 @@ namespace MyCoffeeShop.DataAccess
         private DataContext _context;
         private DbSet<T> dbSet;
 
+        public Repository()
+        {
+            this._context = new DataContext();
+            this.dbSet = _context.Set<T>();
+        }
         public void DeleteById(string Id)
         {
-            T entity = GetById(Id);
+            T entity = dbSet.Find(Id);
             if(_context.Entry(entity).State == EntityState.Detached)
             {
                 dbSet.Attach(entity);
