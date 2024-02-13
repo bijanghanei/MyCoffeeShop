@@ -11,7 +11,7 @@ namespace MyCoffeeShop.Core.Contracts
 {
     public interface IOrderService
     {
-        void CreatOrder(List<CartItemDto> cartItems);
+        Order CreatOrder(List<CartItemDto> cartItems);
         void UpdateOrder(Order order);
         List<Order> GetAllOrders();
         Order GetOrder(string orderId);
