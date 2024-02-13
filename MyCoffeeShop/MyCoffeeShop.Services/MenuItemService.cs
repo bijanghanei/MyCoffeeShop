@@ -29,6 +29,13 @@ namespace MyCoffeeShop.Services
 
         public void CreateItem(MenuItem item)
         {
+            //MenuItem menuItem = new MenuItem()
+            //{
+            //    Name = item.Name,
+            //    Description = item.Description,
+            //    Price = item.Price,
+            //    ImageURL = item.ImageURL,
+            //};
             repository.Insert(item);
             repository.Save();
         }

@@ -37,16 +37,16 @@ namespace MyCoffeeShop.WebAPI.Controllers
         public IHttpActionResult CreateItem(MenuItem item)
         {
             menuService.CreateItem(item);
-            return Redirect("/api/Menu/");
+            return Redirect("https://localhost:44374/api/menu");
         }
 
         // PUT api/<controller>/5
         [HttpPut]
-        public IHttpActionResult Update(string Id, [FromBody] MenuItem item)
+        public IHttpActionResult Update(string Id,MenuItem item)
         {
             MenuItem menuItem = menuService.GetItem(Id);
             menuService.UpdateItem(menuItem);
-            return Redirect("/api/Menu/");
+            return Redirect("https://localhost:44374/api/menu");
         }
 
         // DELETE api/<controller>/5
@@ -54,7 +54,7 @@ namespace MyCoffeeShop.WebAPI.Controllers
         public IHttpActionResult Delete(string Id)
         {
             menuService.DeleteItem(Id);
-            return Redirect("/api/Menu/");
+            return Redirect("https://localhost:44374/api/menu");
         }
     }
 }
