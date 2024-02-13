@@ -11,7 +11,7 @@ namespace MyCoffeeShop.Core.Models
         public virtual ICollection<OrderItem> Items { get; set; }
         public Order()
         {
-            Items = new List<OrderItem>();
+            this.Items = new List<OrderItem>();
         }
     }
 }

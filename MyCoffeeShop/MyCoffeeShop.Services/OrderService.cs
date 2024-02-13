@@ -23,8 +23,9 @@ namespace MyCoffeeShop.Services
             this.orderRepository = orderRepository;
         }
 
-        public void CreatOrderItems(Order order, List<CartItemDto> cartItems)
+        public void CreatOrder(List<CartItemDto> cartItems)
         {
+            Order order = new Order();
             cartItems.ForEach(i =>
             {
                 OrderItem orderItem = new OrderItem()
