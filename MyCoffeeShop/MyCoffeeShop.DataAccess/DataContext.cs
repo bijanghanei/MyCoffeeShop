@@ -16,6 +16,7 @@ namespace MyCoffeeShop.DataAccess
         DbSet<CartItem> cartItems { get; set; }
         DbSet<Order> orders { get; set; }
         DbSet<OrderItem> orderItems { get; set; }
+        DbSet<Customer> cutomers { get; set; }
         public DataContext() : base("DefaultConnection") {}
     }
 }

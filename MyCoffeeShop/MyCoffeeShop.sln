@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCoffeeShop.DataAccess", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCoffeeShop.Services", "MyCoffeeShop.Services\MyCoffeeShop.Services.csproj", "{61C198AA-F634-4DF4-8BDD-92682800FB70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCoffeeShop.API", "MyCoffeeShop.API\MyCoffeeShop.API.csproj", "{BB3A161E-9844-4FFA-B8CC-A68C47928A0B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{61C198AA-F634-4DF4-8BDD-92682800FB70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61C198AA-F634-4DF4-8BDD-92682800FB70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61C198AA-F634-4DF4-8BDD-92682800FB70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB3A161E-9844-4FFA-B8CC-A68C47928A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB3A161E-9844-4FFA-B8CC-A68C47928A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB3A161E-9844-4FFA-B8CC-A68C47928A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB3A161E-9844-4FFA-B8CC-A68C47928A0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

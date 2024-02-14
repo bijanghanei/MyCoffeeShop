@@ -104,6 +104,7 @@
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CartItem.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\MenuItem.cs" />
     <Compile Include="Models\MenuItemCategory.cs" />
     <Compile Include="Models\Order.cs" />

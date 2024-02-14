@@ -23,9 +23,24 @@ namespace MyCoffeeShop.Services
             this.orderRepository = orderRepository;
         }
 
-        public Order CreatOrder(List<CartItemDto> cartItems)
+        public Order CreateOrder(Customer customer)
         {
-            Order order = new Order();
+            Order order = new Order()
+            {
+                Id = customer.Id,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Email = customer.Email,
+                City = customer.City,
+                State = customer.State,
+                Street = customer.Street,
+                ZipCode = customer.ZipCode,
+            };
+            return order;
+        }
+
+        public void CreatOrderItems(Order order ,List<CartItemDto> cartItems)
+        {
             cartItems.ForEach(i =>
             {
                 OrderItem orderItem = new OrderItem()
@@ -39,9 +54,9 @@ namespace MyCoffeeShop.Services
                 };
                 order.Items.Add(orderItem);
             });
+
             orderRepository.Insert(order);
             orderRepository.Save();
-            return order;
         }
 
         public List<Order> GetAllOrders()

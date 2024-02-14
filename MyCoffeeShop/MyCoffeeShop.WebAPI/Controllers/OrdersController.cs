@@ -21,8 +21,8 @@ namespace MyCoffeeShop.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/orders/")]
-        public List<Order> GetAllOrders(string Id)
+        [Route("api/orders/allorders")]
+        public List<Order> GetAllOrders()
         {
             return orderService.GetAllOrders();
         }
@@ -33,12 +33,18 @@ namespace MyCoffeeShop.WebAPI.Controllers
             return orderService.GetOrder(Id);
         }
 
-        [HttpPost]
-        public Order CreateOrder()
-        {
-            List<CartItemDto> cartItems = cartService.GetCartItems().ToList();
-            Order order = orderService.CreatOrder(cartItems);
-            return order;
-        }
+
+
+        /* Just for test */
+
+        //[HttpPost]
+        //[Route("api/orders/create")]
+        //public Order CreateOrder()
+        //{
+        //    Order order = new Order();
+        //    List<CartItemDto> cartItems = cartService.GetCartItems().ToList();
+        //    orderService.CreatOrderItems(order,cartItems);
+        //    return order;
+        //}
     }
 }

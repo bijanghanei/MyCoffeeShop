@@ -13,10 +13,14 @@ namespace MyCoffeeShop.WebAPI.Controllers
     public class CartController : ApiController
     {
         ICartService cartService;
+        IOrderService orderService;
+        IRepository<Customer> customerRepository;
 
-        public CartController(ICartService cartService)
+        public CartController(ICartService cartService,IRepository<Customer> customerRepository,IOrderService orderService)
         {
             this.cartService = cartService;
+            this.customerRepository = customerRepository;
+            this.orderService = orderService;
         }
         // GET api/<controller>
         public IEnumerable<CartItemDto> GetCartItems()
@@ -47,5 +51,24 @@ namespace MyCoffeeShop.WebAPI.Controllers
             cartService.RemoveFromCart(Id);
             return Redirect("https://localhost:44374/api/cart");
         }
+
+        [HttpPost]
+        [Route("api/cart/checkout")]
+        public IHttpActionResult Checkout()
+        {
+            Customer customer = customerRepository.GetAll().FirstOrDefault(c => c.Email == User.Identity.Name);
+            List<CartItemDto> cartItems = cartService.GetCartItems().ToList();
+            if (customer == null)
+            {
+                return Redirect("error");
+            }
+            else
+            {
+                Order order = orderService.CreateOrder(customer);
+                orderService.CreatOrderItems(order,cartItems);
+                return Redirect($"https://localhost:44374/api/orders/{order.Id}");
+            }
+        }
+
     }
 }

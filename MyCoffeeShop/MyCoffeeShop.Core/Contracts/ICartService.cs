@@ -16,5 +16,6 @@ namespace MyCoffeeShop.Core.Contracts
         void RemoveFromCart(string cartItemId);
         Cart GetCart(bool createIfNull);
         List<CartItemDto> GetCartItems();
+
     }
 }
